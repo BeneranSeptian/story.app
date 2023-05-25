@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.seftian.storyapp.data.model.LoginModel
@@ -12,11 +13,14 @@ import com.seftian.storyapp.databinding.ActivityMainBinding
 import com.seftian.storyapp.ui.activities.login.LoginViewModel
 import com.seftian.storyapp.util.Helper
 import com.seftian.storyapp.util.MainViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +30,7 @@ class MainActivity : AppCompatActivity() {
         val intentSignup = Intent(this, SignUpActivity:: class.java )
         val customDialog = Helper.customDialog(this@MainActivity)
 
-        val factory = MainViewModelFactory()
-        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+
 
 
         viewModel.loading.observe(this) {

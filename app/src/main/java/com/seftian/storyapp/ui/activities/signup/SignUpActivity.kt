@@ -3,19 +3,19 @@ package com.seftian.storyapp.ui.activities.signup
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.ViewModelProvider
-import com.seftian.storyapp.util.MainViewModelFactory
 import com.seftian.storyapp.R
 import com.seftian.storyapp.data.model.SignUpModel
 import com.seftian.storyapp.databinding.ActivitySignUpBinding
 import com.seftian.storyapp.util.Helper
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivitySignUpBinding
-    private lateinit var viewModel: SignupViewModel
+    private val viewModel: SignupViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,15 +25,11 @@ class SignUpActivity : AppCompatActivity() {
 
         val customDialog = Helper.customDialog(this@SignUpActivity)
 
-
-        val factory = MainViewModelFactory()
-        viewModel = ViewModelProvider(this, factory)[SignupViewModel::class.java]
-
         viewModel.loading.observe(this) {
             if (it) {
                 customDialog.show()
             } else {
-                customDialog.show()
+                customDialog.dismiss()
             }
         }
 

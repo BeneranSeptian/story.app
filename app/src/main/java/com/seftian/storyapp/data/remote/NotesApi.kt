@@ -14,4 +14,8 @@ interface NotesApi {
 
     @POST("login")
     suspend fun login(@Body requestBody: LoginModel): Response<LoginResponse>
+
+    companion object {
+        const val BASE_URL = "https://story-api.dicoding.dev/v1/"
+    }
 }

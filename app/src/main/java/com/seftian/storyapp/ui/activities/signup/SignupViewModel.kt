@@ -6,12 +6,16 @@ import androidx.lifecycle.viewModelScope
 import com.seftian.storyapp.data.model.ResponseModel
 import com.seftian.storyapp.data.remote.RetrofitClient
 import com.seftian.storyapp.data.model.SignUpModel
+import com.seftian.storyapp.data.remote.NotesApi
 import com.seftian.storyapp.util.Helper.extractErrorMessage
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class SignupViewModel: ViewModel() {
+@HiltViewModel
+class SignupViewModel @Inject constructor(private val notesApi: NotesApi): ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     val loading = _loading
 
@@ -27,7 +31,7 @@ class SignupViewModel: ViewModel() {
             _loading.value = true
 
             val response = try {
-                RetrofitClient.getApiService().signUp(payload)
+                notesApi.signUp(payload)
             }catch (e: HttpException) {
                 _errorResponse.value = e.message()
                 return@launch
