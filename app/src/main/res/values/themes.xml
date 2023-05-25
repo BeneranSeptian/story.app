@@ -1,0 +1,8 @@
+<resources>
+    <style name="Base.Theme.StoryApp" parent="Theme.Material3.DayNight.NoActionBar">
+         <item name="colorPrimary">@color/primaryBlue</item>
+         <item name="colorSecondary">@color/secondaryBlue</item>
+    </style>
+
+    <style name="Theme.StoryApp" parent="Base.Theme.StoryApp" />
+</resources>

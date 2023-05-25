@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TextInputLayoutCustom">
+        <attr name="validationType" format="enum" >
+            <enum name="EMAIL" value="0" />
+            <enum name="PASSWORD" value="1" />
+            <enum name="NOTHING" value="2" />
+        </attr>
+        <attr name="minLength" format="integer"/>
+    </declare-styleable>
+</resources>
