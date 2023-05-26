@@ -1,10 +1,13 @@
 package com.seftian.storyapp.di
 
+import android.content.Context
+import androidx.room.Room
+import com.seftian.storyapp.data.local.UserDatabase
 import com.seftian.storyapp.data.remote.NotesApi
-import com.seftian.storyapp.data.remote.RetrofitClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+object AppModule {
 
     @Provides
     @Singleton
@@ -32,5 +35,15 @@ class AppModule {
             .client(client)
             .build()
             .create(NotesApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserDatabase(@ApplicationContext context: Context): UserDatabase {
+        return Room.databaseBuilder(
+            context,
+            UserDatabase::class.java,
+            "user.db"
+        ).build()
     }
 }
