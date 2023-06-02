@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="TextInputLayoutCustom">
-        <attr name="validationType" format="enum" >
+        <attr name="validationType" format="enum">
             <enum name="EMAIL" value="0" />
             <enum name="PASSWORD" value="1" />
             <enum name="NOTHING" value="2" />
         </attr>
-        <attr name="minLength" format="integer"/>
+        <attr name="minLength" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="AppWidgetAttrs">
+        <attr name="appWidgetPadding" format="dimension" />
+        <attr name="appWidgetInnerRadius" format="dimension" />
+        <attr name="appWidgetRadius" format="dimension" />
     </declare-styleable>
 </resources>

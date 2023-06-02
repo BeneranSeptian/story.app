@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title_signup"
-        app:startIconDrawable="@drawable/baseline_person_24"
+        app:startIconDrawable="@drawable/ic_person"
         app:startIconTint="@color/primaryBlue">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="@id/layout_register_name"
         app:layout_constraintStart_toStartOf="@id/layout_register_name"
         app:layout_constraintTop_toBottomOf="@id/layout_register_name"
-        app:startIconDrawable="@drawable/outline_email_24"
+        app:startIconDrawable="@drawable/ic_email"
         app:startIconTint="@color/primaryBlue">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -100,7 +100,7 @@
         app:layout_constraintEnd_toEndOf="@id/layout_register_email"
         app:layout_constraintStart_toStartOf="@id/layout_register_email"
         app:layout_constraintTop_toBottomOf="@id/layout_register_email"
-        app:startIconDrawable="@drawable/baseline_vpn_key_24"
+        app:startIconDrawable="@drawable/ic_key"
         app:startIconTint="@color/primaryBlue">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -131,7 +131,7 @@
         app:layout_constraintEnd_toEndOf="@id/layout_register_password"
         app:layout_constraintStart_toStartOf="@id/layout_register_password"
         app:layout_constraintTop_toBottomOf="@id/layout_register_password"
-        app:startIconDrawable="@drawable/baseline_vpn_key_24"
+        app:startIconDrawable="@drawable/ic_key"
         app:startIconTint="@color/primaryBlue">
 
         <com.google.android.material.textfield.TextInputEditText

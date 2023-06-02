@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="email">Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="login">MASUK</string>
+    <string name="sign_up">DAFTAR</string>
+    <string name="error_email">Alamat email salah</string>
+    <string name="error_password">Kata sandi minimal %1$s dan mengandung huruf dan angka</string>
+    <string name="story_app_logo">logo story app</string>
+    <string name="name">Nama</string>
+    <string name="repeat_password">Konfirmasi password</string>
+    <string name="passwords_dont_match">Password tidak sama</string>
+    <string name="loading">Memuat…</string>
+    <string name="logout">Keluar</string>
+    <string name="change_language">Ganti Bahasa</string>
+    <string name="welcome_back">Selamat Datang</string>
+    <string name="story_by">Story oleh %1$s</string>
+    <string name="submit">SUBMIT</string>
+    <string name="dont_have_permission">Tidak memiliki izin.</string>
+    <string name="add_picture_first">Mohon untuk menambahkan gambar.</string>
+    <string name="fail_capture_image">Gagal mengambil gambar.</string>
+    <string name="choose_image_from">Pilih gambar dari:</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="icon">Ikon</string>
+    <string name="fail_open_camera">Gagal membuka kamera</string>
+    <string name="image_widget">gambar widget</string>
+</resources>

@@ -7,11 +7,22 @@
     <string name="error_email">Invalid email address</string>
     <string name="error_password">Password must be at least %1$s characters and contain alphanumeric characters</string>
     <string name="story_app_logo">story app logo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="sign_up_tv">SIGN UP</string>
-    <string name="name">Nama</string>
+    <string name="name">Name</string>
     <string name="repeat_password">Confirm password</string>
     <string name="passwords_dont_match">Passwords don\'t match</string>
     <string name="loading">Loading…</string>
+    <string name="logout">Logout</string>
+    <string name="change_language">Change Language</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="story_by">Story by %1$s</string>
+    <string name="submit">SUBMIT</string>
+    <string name="dont_have_permission">Does not have permission.</string>
+    <string name="add_picture_first">Please add picture first.</string>
+    <string name="fail_capture_image">Failed to capture image.</string>
+    <string name="choose_image_from">Choose image from:"</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="icon">Icon</string>
+    <string name="fail_open_camera">Failed to open camera</string>
+    <string name="image_widget">image widget</string>
 </resources>

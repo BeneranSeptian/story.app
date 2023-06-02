@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import com.seftian.storyapp.R
+import com.seftian.storyapp.data.model.ApiResponse
 import com.seftian.storyapp.data.model.SignUpModel
 import com.seftian.storyapp.databinding.ActivitySignUpBinding
 import com.seftian.storyapp.util.Helper
@@ -25,24 +26,24 @@ class SignUpActivity : AppCompatActivity() {
 
         val customDialog = Helper.customDialog(this@SignUpActivity)
 
-        viewModel.loading.observe(this) {
-            if (it) {
-                customDialog.show()
-            } else {
-                customDialog.dismiss()
-            }
-        }
+        viewModel.apiResponse.observe(this){apiResponse ->
 
-        viewModel.responseSignUp.observe(this){
-            if(it != null && !it.error){
-                Toast.makeText(this,it.message, Toast.LENGTH_SHORT).show()
-                finish()
-            }
-        }
+            when(apiResponse){
+                is ApiResponse.Loading -> customDialog.show()
 
-        viewModel.errorResponse.observe(this){
-            if(it != null){
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                is ApiResponse.Success -> {
+                    customDialog.dismiss()
+
+                    val data = apiResponse.data
+                    Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+
+                is ApiResponse.Error -> {
+                    customDialog.dismiss()
+                    val errorMessage = apiResponse.message
+                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

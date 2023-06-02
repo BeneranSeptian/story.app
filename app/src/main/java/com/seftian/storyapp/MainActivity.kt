@@ -1,20 +1,20 @@
 package com.seftian.storyapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.ViewModelProvider
+import com.seftian.storyapp.data.mappers.toUserEntity
+import com.seftian.storyapp.data.model.ApiResponse
 import com.seftian.storyapp.data.model.LoginModel
-import com.seftian.storyapp.ui.activities.signup.SignUpActivity
 import com.seftian.storyapp.databinding.ActivityMainBinding
+import com.seftian.storyapp.ui.activities.home.HomeActivity
 import com.seftian.storyapp.ui.activities.login.LoginViewModel
+import com.seftian.storyapp.ui.activities.signup.SignUpActivity
 import com.seftian.storyapp.util.Helper
-import com.seftian.storyapp.util.MainViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -28,28 +28,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val intentSignup = Intent(this, SignUpActivity:: class.java )
+        val intentHome = Intent(this, HomeActivity::class.java)
         val customDialog = Helper.customDialog(this@MainActivity)
 
+        viewModel.apiResponse.observe(this){apiResponse->
+            when(apiResponse){
+                ApiResponse.Loading -> customDialog.show()
 
+                is ApiResponse.Success -> {
+                    val data = apiResponse.data
 
+                    customDialog.dismiss()
+                    Toast.makeText(this,data.message, Toast.LENGTH_SHORT).show()
+                    viewModel.updateUserLoginData(data.toUserEntity())
+                    viewModel.setTokenToPref(data.loginResult.token)
+                    startActivity(intentHome)
+                }
 
-        viewModel.loading.observe(this) {
-            if (it) {
-                customDialog.show()
-            } else {
-                customDialog.dismiss()
+                is ApiResponse.Error -> {
+                    val message = apiResponse.message
+
+                    customDialog.dismiss()
+                    Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
-        viewModel.responseLogin.observe(this){
-            if(it != null && !it.error){
-                Toast.makeText(this,it.message, Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        viewModel.errorResponse.observe(this){
-            if(it != null){
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        viewModel.isLoggedIn.observe(this) {
+            if(it){
+                startActivity(intentHome)
             }
         }
 
