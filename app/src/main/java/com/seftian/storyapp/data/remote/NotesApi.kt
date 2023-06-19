@@ -23,7 +23,10 @@ interface NotesApi {
     suspend fun login(@Body requestBody: LoginModel): Response<LoginResponse>
 
     @GET("stories")
-    suspend fun allStories(@Query("page")page: Int?):Response<UserStoryResponse>
+    suspend fun allStories(
+        @Query("page")page: Int?,
+        @Query("size")size: Int?,
+    ):Response<UserStoryResponse>
 
     @Multipart
     @POST("stories")
