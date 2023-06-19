@@ -18,9 +18,9 @@ class StoryPagingSource (
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, StoryResponse> {
-        val position = params.key ?: INITIAL_PAGE
-        val storyResponse = notesApi.allStories(position, SIZE_TO_LOAD)
         return try {
+            val position = params.key ?: INITIAL_PAGE
+            val storyResponse = notesApi.allStories(position, SIZE_TO_LOAD)
             LoadResult.Page(
                 data = storyResponse.body()!!.listStory,
                 prevKey = if (position == INITIAL_PAGE) null else position-1,

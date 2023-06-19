@@ -25,4 +25,5 @@
     <string name="icon">Icon</string>
     <string name="fail_open_camera">Failed to open camera</string>
     <string name="image_widget">image widget</string>
+    <string name="retry">Retry</string>
 </resources>

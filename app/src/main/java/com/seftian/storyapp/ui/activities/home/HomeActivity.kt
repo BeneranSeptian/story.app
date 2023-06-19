@@ -22,6 +22,7 @@ import com.seftian.storyapp.R
 import com.seftian.storyapp.databinding.ActivityHomeBinding
 import com.seftian.storyapp.ui.activities.addstory.AddStoryActivity
 import com.seftian.storyapp.ui.activities.detail.DetailStoryActivity
+import com.seftian.storyapp.ui.activities.home.adapter.LoadingStateAdapter
 import com.seftian.storyapp.ui.activities.home.adapter.StoryAdapter
 import com.seftian.storyapp.ui.activities.home.adapter.StoryAdapterClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,7 +62,11 @@ class HomeActivity :
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = StoryAdapter( this@HomeActivity, this)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter{
+                adapter.retry()
+            }
+        )
 
         viewModel._testingStory.observe(this){
             adapter.submitData(lifecycle, it)

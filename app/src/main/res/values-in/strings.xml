@@ -26,4 +26,5 @@
     <string name="icon">Ikon</string>
     <string name="fail_open_camera">Gagal membuka kamera</string>
     <string name="image_widget">gambar widget</string>
+    <string name="retry">Coba Lagi</string>
 </resources>

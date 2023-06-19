@@ -39,7 +39,8 @@ class StoryAdapter(
             Glide
                 .with(holder.itemView.context)
                 .load(story?.photoUrl)
-                .placeholder(R.drawable.ic_person)
+                .placeholder(R.drawable.ic_broken_image)
+                .error(R.drawable.ic_broken_image)
                 .into(ivStory)
 
             tvStory.text = formattedString
