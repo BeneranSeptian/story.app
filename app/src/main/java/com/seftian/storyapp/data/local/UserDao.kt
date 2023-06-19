@@ -1,8 +1,10 @@
 package com.seftian.storyapp.data.local
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
+import com.seftian.storyapp.data.model.StoryResponse
 
 @Dao
 interface UserDao {
@@ -19,7 +21,7 @@ interface UserDao {
     suspend fun upsertStory(story: List<StoriesEntity>)
 
     @Query("SELECT * FROM storiesentity")
-    fun storySource(): List<StoriesEntity>
+    fun getAllStories(): PagingSource<Int, StoryResponse>
 
     @Query("SELECT * FROM storiesentity WHERE id = :storyId")
     fun getStory(storyId: String): StoriesEntity

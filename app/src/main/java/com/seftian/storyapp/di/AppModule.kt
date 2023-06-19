@@ -75,8 +75,10 @@ object AppModule {
         return Room.databaseBuilder(
             context,
             UserDatabase::class.java,
-            "user.db"
-        ).build()
+            "user.db",
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

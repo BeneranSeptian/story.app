@@ -3,18 +3,14 @@ package com.seftian.storyapp.ui.activities.home
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.seftian.storyapp.StoryRepository
 import com.seftian.storyapp.data.local.UserDatabase
-import com.seftian.storyapp.data.model.ApiResponse
 import com.seftian.storyapp.data.model.StoryResponse
-import com.seftian.storyapp.data.model.UserStoryResponse
 import com.seftian.storyapp.data.remote.NotesApi
-import com.seftian.storyapp.domain.Story
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,15 +25,9 @@ class HomeViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
-    private val repository = StoryRepository(notesApi)
+    private val repository = StoryRepository(userDatabase,notesApi)
 
-    private val _apiResponse = MutableLiveData<ApiResponse<UserStoryResponse>>()
-    val apiResponse = _apiResponse
-
-    private val _userStories = MutableLiveData<List<Story>>()
-    val userStories = _userStories
-
-    val _testingStory: LiveData<PagingData<StoryResponse>> = repository.getStory().cachedIn(viewModelScope)
+    val userStories: LiveData<PagingData<StoryResponse>> = repository.getStory().cachedIn(viewModelScope)
 
     fun logout(){
         viewModelScope.launch {
@@ -61,10 +51,6 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun resetStory(){
-        repository.resetStory()
     }
 
 }

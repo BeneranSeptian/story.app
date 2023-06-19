@@ -68,7 +68,7 @@ class HomeActivity :
             }
         )
 
-        viewModel._testingStory.observe(this){
+        viewModel.userStories.observe(this){
             adapter.submitData(lifecycle, it)
         }
 
