@@ -32,11 +32,11 @@ class AddStoryViewModel @Inject constructor(
     private val _uriPhoto = MutableLiveData<Uri>()
     val uriPhoto = _uriPhoto
 
-    private fun uploadStory(imageMultipart: MultipartBody.Part, description: RequestBody){
+    private fun uploadStory(imageMultipart: MultipartBody.Part, description: RequestBody, lat:RequestBody?, lon:RequestBody?){
         viewModelScope.launch {
 
             val response = try {
-                notesApi.addStory(imageMultipart, description)
+                notesApi.addStory(imageMultipart, description, lat, lon)
             }catch (e: HttpException) {
                 _apiResponse.value = ApiResponse.Error(e.message)
                 return@launch
@@ -57,7 +57,7 @@ class AddStoryViewModel @Inject constructor(
         }
     }
 
-    fun compressAndUploadStory(photoFile: File, description: String) {
+    fun compressAndUploadStory(photoFile: File, description: String, lat: Float?, lon:Float?) {
         viewModelScope.launch {
             val file = Helper.reduceFileImage(photoFile)
 
@@ -65,6 +65,8 @@ class AddStoryViewModel @Inject constructor(
 
             try {
                 val desc = description.toRequestBody("text/plain".toMediaType())
+                val latitude = lat.toString().toRequestBody("text/plain".toMediaType())
+                val longitude = lon.toString().toRequestBody("text/plain".toMediaType())
                 val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
                 val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
                     "photo",
@@ -72,7 +74,11 @@ class AddStoryViewModel @Inject constructor(
                     requestImageFile
                 )
 
-                uploadStory(imageMultipart, desc)
+                if(lat !== null && lon !== null){
+                    uploadStory(imageMultipart, desc, latitude, longitude)
+                }else{
+                    uploadStory(imageMultipart, desc, null, null)
+                }
 
             }catch (e: Exception){
                 _apiResponse.value = ApiResponse.Error(e.message)

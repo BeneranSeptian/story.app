@@ -89,6 +89,12 @@ dependencies {
 
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
     implementation 'androidx.room:room-paging:2.6.0-alpha01'
+
+    implementation "androidx.core:core-splashscreen:1.0.1"
+
+    // maps
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 }
 
 kapt {

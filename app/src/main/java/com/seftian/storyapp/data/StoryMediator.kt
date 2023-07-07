@@ -5,8 +5,8 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.seftian.storyapp.StoryPagingSource.Companion.INITIAL_PAGE
-import com.seftian.storyapp.StoryPagingSource.Companion.SIZE_TO_LOAD
+import com.seftian.storyapp.data.StoryPagingSource.Companion.INITIAL_PAGE
+import com.seftian.storyapp.data.StoryPagingSource.Companion.SIZE_TO_LOAD
 import com.seftian.storyapp.data.local.RemoteKeys
 import com.seftian.storyapp.data.local.StoriesEntity
 import com.seftian.storyapp.data.local.UserDatabase

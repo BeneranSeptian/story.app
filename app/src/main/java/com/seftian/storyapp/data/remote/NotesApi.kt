@@ -28,10 +28,18 @@ interface NotesApi {
         @Query("size")size: Int?,
     ):Response<UserStoryResponse>
 
+    @GET("stories")
+    suspend fun getStoryWithLocation(
+        @Query("location")location: Int,
+        @Query("page")page: Int?,
+    ):Response<UserStoryResponse>
+
     @Multipart
     @POST("stories")
     suspend fun addStory(@Part file: MultipartBody.Part,
-                         @Part("description") description: RequestBody
+                         @Part("description") description: RequestBody,
+                         @Part("lat") lat: RequestBody?,
+                         @Part("lon") lon: RequestBody?
     ):Response<ResponseModel>
     companion object {
         const val BASE_URL = "https://story-api.dicoding.dev/v1/"

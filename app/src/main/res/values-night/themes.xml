@@ -1,4 +1,0 @@
-<resources>
-    <style name="Base.Theme.StoryApp" parent="Theme.Material3.DayNight.NoActionBar">
-    </style>
-</resources>

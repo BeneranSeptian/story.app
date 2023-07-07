@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.seftian.storyapp.StoryRepository
+import com.seftian.storyapp.domain.StoryRepository
 import com.seftian.storyapp.data.local.UserDatabase
 import com.seftian.storyapp.data.model.StoryResponse
 import com.seftian.storyapp.data.remote.NotesApi
@@ -49,6 +49,14 @@ class HomeViewModel @Inject constructor(
                 sharedPreferences.edit {
                     clear()
                 }
+            }
+        }
+    }
+
+    fun deleteRemoteKeys(){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                userDatabase.remoteKeysDao.deleteRemoteKeys()
             }
         }
     }

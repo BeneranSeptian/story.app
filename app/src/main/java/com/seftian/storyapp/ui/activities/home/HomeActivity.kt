@@ -8,42 +8,25 @@ import android.view.Menu
 import android.view.View
 import android.widget.PopupMenu
 import androidx.activity.addCallback
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.seftian.storyapp.ui.fragment.HomeFragment
+import com.seftian.storyapp.ui.fragment.maps.MapsFragment
 import com.seftian.storyapp.R
 import com.seftian.storyapp.databinding.ActivityHomeBinding
-import com.seftian.storyapp.ui.activities.addstory.AddStoryActivity
-import com.seftian.storyapp.ui.activities.detail.DetailStoryActivity
-import com.seftian.storyapp.ui.activities.home.adapter.LoadingStateAdapter
-import com.seftian.storyapp.ui.activities.home.adapter.StoryAdapter
-import com.seftian.storyapp.ui.activities.home.adapter.StoryAdapterClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeActivity :
-    AppCompatActivity(),
-    SwipeRefreshLayout.OnRefreshListener,
-    StoryAdapterClickListener{
+class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private val viewModel: HomeViewModel by viewModels()
     private lateinit var toolbar: MaterialToolbar
-
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: StoryAdapter
-
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private val viewModel: HomeViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,38 +38,30 @@ class HomeActivity :
         setSupportActionBar(toolbar)
         shapeToolbar()
 
-        swipeRefreshLayout = binding.swipeRefreshLayout
-        swipeRefreshLayout.setOnRefreshListener(this)
+        val initialFragment = HomeFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.wakwaw, initialFragment)
+            .commit()
 
-        recyclerView = binding.rvStory
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        adapter = StoryAdapter( this@HomeActivity, this)
-        recyclerView.adapter = adapter.withLoadStateFooter(
-            footer = LoadingStateAdapter{
-                adapter.retry()
+        binding.navBottom.setOnItemSelectedListener {item ->
+            val fragment: Fragment = when (item.itemId) {
+                R.id.navigation_all_story -> HomeFragment()
+                R.id.navigation_map_story -> MapsFragment()
+                else -> HomeFragment()
             }
-        )
 
-        viewModel.userStories.observe(this){
-            adapter.submitData(lifecycle, it)
-        }
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.wakwaw, fragment)
+                .commit()
 
-
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == CODE_TO_REFRESH) {
-//                viewModel.getAllStoriesFromRemote(1)
-                viewModel.deleteAllStoriesFromLocal()
-            }
-        }
-        binding.fabAddStory.setOnClickListener {
-            val intent = Intent(this, AddStoryActivity::class.java)
-            resultLauncher.launch(intent)
+            return@setOnItemSelectedListener true
         }
 
         onBackPressedDispatcher.addCallback(this ) {
             finishAffinity()
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -103,9 +78,6 @@ class HomeActivity :
         return true
     }
 
-    override fun onRefresh() {
-        recyclerView.scrollToPosition(0)
-    }
 
     private fun shapeToolbar(){
 
@@ -125,6 +97,7 @@ class HomeActivity :
         viewModel.logout()
         viewModel.deleteAllStoriesFromLocal()
         viewModel.deleteToken()
+        viewModel.deleteRemoteKeys()
         finish()
     }
 
@@ -148,12 +121,6 @@ class HomeActivity :
             }
         }
         popupMenu.show()
-    }
-
-    override fun onItemClick(storyId: String) {
-        val intentToDetail = Intent(this, DetailStoryActivity::class.java)
-        intentToDetail.putExtra("storyId", storyId)
-        startActivity(intentToDetail)
     }
 
     companion object{

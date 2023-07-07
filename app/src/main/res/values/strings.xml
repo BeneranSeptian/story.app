@@ -26,4 +26,10 @@
     <string name="fail_open_camera">Failed to open camera</string>
     <string name="image_widget">image widget</string>
     <string name="retry">Retry</string>
+    <string name="add_story">add story</string>
+    <string name="use_location_question">Do you want to use location?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="fetch_more_stories">Fetch More Stories!</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

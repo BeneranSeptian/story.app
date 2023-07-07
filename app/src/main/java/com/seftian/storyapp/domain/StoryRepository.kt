@@ -1,4 +1,4 @@
-package com.seftian.storyapp
+package com.seftian.storyapp.domain
 
 import androidx.lifecycle.LiveData
 import androidx.paging.ExperimentalPagingApi
@@ -6,7 +6,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import com.seftian.storyapp.StoryPagingSource.Companion.SIZE_TO_LOAD
+import com.seftian.storyapp.data.StoryPagingSource
+import com.seftian.storyapp.data.StoryPagingSource.Companion.SIZE_TO_LOAD
 import com.seftian.storyapp.data.StoryMediator
 import com.seftian.storyapp.data.local.UserDatabase
 import com.seftian.storyapp.data.model.StoryResponse
@@ -28,9 +29,5 @@ class StoryRepository (
                 userDatabase.dao.getAllStories()
             }
         ).liveData
-    }
-
-    fun resetStory(){
-        StoryPagingSource(notesApi).invalidate()
     }
 }

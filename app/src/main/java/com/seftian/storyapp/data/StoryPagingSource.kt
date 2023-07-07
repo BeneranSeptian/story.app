@@ -1,4 +1,4 @@
-package com.seftian.storyapp
+package com.seftian.storyapp.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
