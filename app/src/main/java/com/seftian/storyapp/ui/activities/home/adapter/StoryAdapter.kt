@@ -17,7 +17,6 @@ class StoryAdapter(
 ): PagingDataAdapter<StoryResponse,StoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     inner class ViewHolder( val binding: StoryItemBinding) : RecyclerView.ViewHolder(binding.root)
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryAdapter.ViewHolder {
         return ViewHolder(StoryItemBinding
             .inflate(
@@ -54,7 +53,7 @@ class StoryAdapter(
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryResponse>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryResponse>() {
 
             override fun areItemsTheSame(oldItem: StoryResponse, newItem: StoryResponse): Boolean {
                 return oldItem == newItem

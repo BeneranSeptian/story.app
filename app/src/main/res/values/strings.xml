@@ -31,5 +31,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="fetch_more_stories">Fetch More Stories!</string>
+    <string name="location_not_found">Location not found</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

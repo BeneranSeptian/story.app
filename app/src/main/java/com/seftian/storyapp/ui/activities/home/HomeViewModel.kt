@@ -10,7 +10,6 @@ import androidx.paging.cachedIn
 import com.seftian.storyapp.domain.StoryRepository
 import com.seftian.storyapp.data.local.UserDatabase
 import com.seftian.storyapp.data.model.StoryResponse
-import com.seftian.storyapp.data.remote.NotesApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,14 +19,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val notesApi: NotesApi,
     private val userDatabase: UserDatabase,
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences,
+    private val storyRepository: StoryRepository
 ) : ViewModel() {
 
-    private val repository = StoryRepository(userDatabase,notesApi)
 
-    val userStories: LiveData<PagingData<StoryResponse>> = repository.getStory().cachedIn(viewModelScope)
+    val userStories: LiveData<PagingData<StoryResponse>> = storyRepository.getStory().cachedIn(viewModelScope)
 
     fun logout(){
         viewModelScope.launch {

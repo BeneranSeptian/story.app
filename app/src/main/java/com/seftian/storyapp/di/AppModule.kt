@@ -9,6 +9,7 @@ import com.seftian.storyapp.data.local.UserDatabase
 import com.seftian.storyapp.data.remote.NotesApi
 import com.seftian.storyapp.di.token.TokenProvider
 import com.seftian.storyapp.di.token.TokenProviderImpl
+import com.seftian.storyapp.domain.StoryRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -90,4 +91,11 @@ object AppModule {
     @Provides
     @Singleton
     fun provideTokenProvider(impl: TokenProviderImpl): TokenProvider = impl
+
+
+    @Provides
+    @Singleton
+    fun provideStoryRepository(notesApi: NotesApi, userDatabase: UserDatabase): StoryRepository {
+        return StoryRepository(userDatabase, notesApi)
+    }
 }

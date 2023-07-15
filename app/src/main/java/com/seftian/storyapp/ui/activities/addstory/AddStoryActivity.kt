@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -249,13 +248,14 @@ class AddStoryActivity : AppCompatActivity() {
                 val description = binding.edDescription.text.toString()
 
                 if (location != null) {
-                    //Toast.makeText(this@AddStoryActivity, location.toString(), Toast.LENGTH_LONG).show()
                     viewModel.compressAndUploadStory(
                         getFile!!,
                         description,
                         location.latitude.toFloat(),
                         location.longitude.toFloat()
                     )
+                } else{
+                    Toast.makeText(this@AddStoryActivity, getString(R.string.location_not_found), Toast.LENGTH_LONG).show()
                 }
             }
         } else {
@@ -275,7 +275,7 @@ class AddStoryActivity : AppCompatActivity() {
 
         return if (isFineLocationGranted) {
             val locationTask = fusedLocationProvider.lastLocation
-            val locationResult = suspendCoroutine<Location?> { continuation ->
+            val locationResult = suspendCoroutine { continuation ->
                 locationTask.addOnSuccessListener { location ->
                     continuation.resume(location)
                 }
@@ -301,7 +301,7 @@ class AddStoryActivity : AppCompatActivity() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
             if (isGranted) {
-
+                submitWithLocation()
             }
         }
 
