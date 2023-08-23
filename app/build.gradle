@@ -22,8 +22,18 @@ android {
         buildConfigField "String", "APP_STORE_KEY", "\"1b1cdadc-03eb-49aa-97fe-66a3a953506b\""
     }
 
+    signingConfigs {
+        release {
+            storeFile file('my-release-key.jks') // Path to your keystore
+            storePassword 'Admin123'
+            keyAlias 'my-key-alias'
+            keyPassword 'Admin123'
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
