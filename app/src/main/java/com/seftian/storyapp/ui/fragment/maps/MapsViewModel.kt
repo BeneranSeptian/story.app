@@ -9,7 +9,6 @@ import com.seftian.storyapp.data.remote.NotesApi
 import com.seftian.storyapp.util.Helper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel

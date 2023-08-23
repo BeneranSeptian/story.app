@@ -2,7 +2,6 @@ package com.seftian.storyapp.ui.fragment
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +14,13 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.seftian.storyapp.R
 import com.seftian.storyapp.databinding.FragmentCameraBinding
 import com.seftian.storyapp.ui.activities.addstory.AddStoryViewModel
 import com.seftian.storyapp.util.Helper
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

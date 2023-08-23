@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.seftian.storyapp.domain.StoryRepository
 import com.seftian.storyapp.data.local.UserDatabase
 import com.seftian.storyapp.data.model.StoryResponse
+import com.seftian.storyapp.domain.StoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val userDatabase: UserDatabase,
     private val sharedPreferences: SharedPreferences,
-    private val storyRepository: StoryRepository
+    storyRepository: StoryRepository
 ) : ViewModel() {
 
 

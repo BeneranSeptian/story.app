@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.seftian.storyapp.data.model.StoryResponse
 import com.seftian.storyapp.data.remote.NotesApi
-import java.lang.Exception
 
 class StoryPagingSource (
     val notesApi: NotesApi

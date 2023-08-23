@@ -14,10 +14,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
-import com.seftian.storyapp.ui.fragment.HomeFragment
-import com.seftian.storyapp.ui.fragment.maps.MapsFragment
 import com.seftian.storyapp.R
 import com.seftian.storyapp.databinding.ActivityHomeBinding
+import com.seftian.storyapp.ui.fragment.HomeFragment
+import com.seftian.storyapp.ui.fragment.maps.MapsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 

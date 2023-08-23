@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.widget.doAfterTextChanged
+import com.microsoft.appcenter.AppCenter
+import com.microsoft.appcenter.analytics.Analytics
+import com.microsoft.appcenter.crashes.Crashes
 import com.seftian.storyapp.data.mappers.toUserEntity
 import com.seftian.storyapp.data.model.ApiResponse
 import com.seftian.storyapp.data.model.LoginModel
@@ -17,16 +19,21 @@ import com.seftian.storyapp.ui.activities.signup.SignUpActivity
 import com.seftian.storyapp.util.Helper
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
     private val viewModel: LoginViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        AppCenter.start(
+            application, BuildConfig.APP_STORE_KEY,
+            Analytics::class.java, Crashes::class.java
+        )
 
         val intentSignup = Intent(this, SignUpActivity:: class.java )
         val intentHome = Intent(this, HomeActivity::class.java)

@@ -1,12 +1,12 @@
 package com.seftian.storyapp.ui.fragment.maps
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
